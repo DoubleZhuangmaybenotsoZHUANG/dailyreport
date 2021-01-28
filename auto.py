@@ -2,7 +2,7 @@
 # 1.谷歌浏览器以及对应版本的chromedrive.exe文件
 # 2.python环境并安装selenium依赖 pip insatll selenium
 
-#注意：目前所在地默认为上海地区，其他地区需要自行改动Xpat
+#注意：目前所在地默认为上海地区，其他地区需要自行改动Xpath
 
 
 from selenium import webdriver
