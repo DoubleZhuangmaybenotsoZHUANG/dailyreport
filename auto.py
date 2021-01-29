@@ -20,34 +20,32 @@ password = 'xxxxxx'
 def get_system(wd):
     # 进入登录页面
     print("正在进入页面")
-    wd.get('https://cas.paas.lixin.edu.cn/cas/login?service=https://portal-theme.paas.lixin.edu.cn/')
+    # 进入登录页面
+    wd.get('https://mcenter.lixin.edu.cn/login.html?ext1=mcenter_mryb')
     # 输入用户名密码，登录
     wd.find_element_by_id('username').send_keys(user)
     wd.find_element_by_id('password').send_keys(password)
     wd.find_element_by_name('submit').click()
-    # 找到每日一报
-    time.sleep(1)
-    wd.find_element_by_xpath("//span[text()='校园生活']/following-sibling::b").click()
-    wd.find_element_by_xpath("//span[@class='vertical_app-name' and text()='每日一报']").click()
-    # 切换窗口
-    handles = wd.window_handles
-    for handle in handles:
-        wd.switch_to.window(handle)
-        if wd.title == "我的填报": break
 
     # 点击新建
+    time.sleep(2)
     wd.find_element_by_id('dw_nBtn').click()
 
     # 切换iframe
     wd.switch_to.frame('side_dw_m_page_frame')
 
     # 修改信息，并提交
+    time.sleep(2)
     wd.find_element_by_xpath("//label[text()='健康']").click()
     wd.find_element_by_xpath("//label[text()='在沪']").click()
     Select(wd.find_element_by_id("selCity_SF")).select_by_visible_text("市辖区")
-    Select(wd.find_element_by_id("SFZX")).select_by_visible_text("不在校")
+    wd.find_element_by_id("select2-SFZX-container").click()
+    time.sleep(1)
+    wd.find_element_by_xpath("//li[text()='不在校']").click()
+    time.sleep(1)
     wd.find_element_by_id('BTN_SAVE').click()
     print("填报完成")
+    wd.quit()
 
 
 if __name__ == '__main__':
